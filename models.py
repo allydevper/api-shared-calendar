@@ -1,26 +1,25 @@
 from pydantic import BaseModel
 from typing import Optional
-from uuid import UUID
 from datetime import datetime, date
 
 class Event(BaseModel):
-    id: Optional[UUID]
+    id: Optional[str]
     name: str
     description: Optional[str]
-    admin_id: Optional[UUID]
+    admin_id: Optional[str]
     created_at: Optional[datetime]
 
 class Participant(BaseModel):
-    id: Optional[UUID]
-    event_id: UUID
+    id: Optional[str]
+    event_id: str
     name: str
     email: Optional[str]
     created_at: Optional[datetime]
 
 class Availability(BaseModel):
-    id: Optional[UUID]
-    participant_id: UUID
-    event_id: UUID
+    id: Optional[str]
+    participant_id: str
+    event_id: str
     start_date: date
     end_date: date
     created_at: Optional[datetime] 
