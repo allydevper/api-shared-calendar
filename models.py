@@ -3,7 +3,7 @@ from typing import Optional
 from datetime import datetime, date
 
 class Event(BaseModel):
-    id: Optional[str]
+    id: Optional[str] = None
     name: str
     description: Optional[str]
     admin_id: Optional[str] = None
