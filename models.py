@@ -6,8 +6,7 @@ class Event(BaseModel):
     id: Optional[str]
     name: str
     description: Optional[str]
-    admin_id: Optional[str]
-    created_at: Optional[datetime]
+    admin_id: Optional[str] = None
 
 class Participant(BaseModel):
     id: Optional[str]

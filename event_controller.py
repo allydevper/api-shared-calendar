@@ -8,7 +8,8 @@ router = APIRouter()
 @router.post("/events/", response_model=Event)
 def create_event(event: Event):
     try:
-        response = supabase.table("sc_events").insert(event.model_dump()).execute()
+        event_dict = event.model_dump(exclude={"id"})
+        response = supabase.table("sc_events").insert(event_dict).execute()
         if not response.data:
             raise HTTPException(status_code=response.status_code, detail="Error creating event")
         return response.data[0]
