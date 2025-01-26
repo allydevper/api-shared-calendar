@@ -66,4 +66,16 @@ def delete_availability(availability_id: str):
     except HTTPException:
         raise
     except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/availability/participant/{participant_id}", response_model=List[Availability])
+def read_availability_by_participant(participant_id: str):
+    try:
+        response = supabase.table("sc_availability").select("*").eq("participant_id", participant_id).execute()
+        if not response.data:
+            raise HTTPException(status_code=404, detail=f"No availability records found for participant {participant_id}")
+        return response.data
+    except HTTPException:
+        raise
+    except Exception as e:
         raise HTTPException(status_code=500, detail=str(e)) 
