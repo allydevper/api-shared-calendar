@@ -13,12 +13,14 @@ class Participant(BaseModel):
     event_id: str
     name: str
     email: Optional[str]
-    created_at: Optional[datetime]
 
 class Availability(BaseModel):
-    id: Optional[str]
+    id: Optional[str] = None
     participant_id: str
     event_id: str
-    start_date: date
-    end_date: date
-    created_at: Optional[datetime] 
+    start_date: datetime
+    end_date: datetime
+    class Config:
+        json_encoders = {
+            datetime: lambda v: v.isoformat()
+        }

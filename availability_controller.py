@@ -8,7 +8,10 @@ router = APIRouter()
 @router.post("/availability/", response_model=Availability)
 def create_availability(availability: Availability):
     try:
-        response = supabase.table("sc_availability").insert(availability.model_dump()).execute()
+        event_dict = availability.model_dump(exclude={"id"})
+        event_dict["start_date"] = event_dict["start_date"].isoformat()
+        event_dict["end_date"] = event_dict["end_date"].isoformat()
+        response = supabase.table("sc_availability").insert(event_dict).execute()
         if not response.data:
             raise HTTPException(status_code=response.status_code, detail="Error creating availability")
         return response.data[0]
