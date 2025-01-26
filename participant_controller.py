@@ -22,7 +22,7 @@ def read_participants():
     try:
         response = supabase.table("sc_participants").select("*").execute()
         if not response.data:
-            raise HTTPException(status_code=404, detail="No participants found")
+            return []
         return response.data
     except HTTPException:
         raise

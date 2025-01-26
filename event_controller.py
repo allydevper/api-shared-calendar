@@ -23,7 +23,7 @@ def read_events():
     try:
         response = supabase.table("sc_events").select("*").execute()
         if not response.data:
-            raise HTTPException(status_code=404, detail="No events found")
+            return []
         return response.data
     except HTTPException:
         raise

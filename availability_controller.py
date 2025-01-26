@@ -25,7 +25,7 @@ def read_availability():
     try:
         response = supabase.table("sc_availability").select("*").execute()
         if not response.data:
-            raise HTTPException(status_code=404, detail="No availability records found")
+            return []
         return response.data
     except HTTPException:
         raise
@@ -73,9 +73,9 @@ def read_availability_by_participant(participant_id: str):
     try:
         response = supabase.table("sc_availability").select("*").eq("participant_id", participant_id).execute()
         if not response.data:
-            raise HTTPException(status_code=404, detail=f"No availability records found for participant {participant_id}")
+            return []
         return response.data
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e)) 
+        raise HTTPException(status_code=500, detail=str(e))
