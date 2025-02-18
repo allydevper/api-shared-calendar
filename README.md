@@ -1,6 +1,6 @@
 # api-shared-calendar
 
-API para el proyecto Shared Calendar hecha con FastAPI.
+API para el proyecto Shared Calendar hecha con FastAPI (python).
 
 ## Descripción
 
