@@ -1,15 +1,17 @@
-# Use the Python 3 alpine official image
-# https://hub.docker.com/_/python
-FROM python:3-alpine
+# Usa una imagen base con Python
+FROM python:3.10
 
-# Create and change to the app directory.
+# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copy local code to the container image.
+# Copia los archivos del proyecto al contenedor
 COPY . .
 
-# Install project dependencies
+# Instala las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Run the web service on container startup.
-CMD ["hypercorn", "main:app", "--bind", "::"]
+# Expone el puerto 8000 para FastAPI
+EXPOSE 8000
+
+# Comando para iniciar la app
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
