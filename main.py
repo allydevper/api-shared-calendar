@@ -7,7 +7,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = ["*"]
+origins = [
+    "https://shared-calendar-production.up.railway.app"
+]
 
 app.add_middleware(
     CORSMiddleware,
